@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style media="screen">
+        html,body{height: 100%;}
+            *{margin: 0;padding: 0}
+            ul{list-style: none;width: 200px;height: 100%;background: #999;}
+            ul li{overflow: hidden; border-bottom: 1px solid #fff;padding: 6px 3px; user-select: none; cursor: pointer}
+            ul h6{font-weight: normal; overflow: hidden; transition: height .5s;}
+            ul h6 a{display: block; }
+            ul li p{float: left;}
+            ul li img{float: right; width: 30px; height: 20px; transform: rotate(-90deg); transition: transform .5s; -ms-transition: transform .5s;
+                    -moz-transition: transform .5s; -webkit-transition: transform .5s;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <p>露娜</p>
+                <img src="modles/xiajian.jpg">
+            </li>
+            <h6>
+                <a>露娜1</a>
+                <a>露娜2</a>
+                <a>露娜3</a>
+                <a>露娜4</a>
+                <a>露娜5</a>
+            </h6>
+
+            <li>
+                <p>孙悟空</p>
+                <img src="modles/xiajian.jpg">
+            </li>
+            <h6>
+                <a>孙悟空1</a>
+                <a>孙悟空2</a>
+                <a>孙悟空3</a>
+            </h6>
+
+            <li>
+                <p>阿珂</p>
+                <img src="modles/xiajian.jpg">
+            </li>
+            <h6>
+                <a>阿珂1</a>
+            </h6>
+
+            <li>
+                <p>韩信</p>
+                <img src="modles/xiajian.jpg">
+            </li>
+            <h6>
+                <a>韩信1</a>
+                <a>韩信2</a>
+                <a>韩信3</a>
+                <a>韩信4</a>
+                <a>韩信5</a>
+                <a>韩信6</a>
+                <a>韩信7</a>
+                <a>韩信8</a>
+            </h6>
+
+            <li>
+                <p>李信</p>
+                <img src="modles/xiajian.jpg">
+            </li>
+            <h6>
+                <a>李信1</a>
+                <a>李信2</a>
+            </h6>
+
+            <li>
+                <p>翟</p>
+                <img src="modles/xiajian.jpg">
+            </li>
+            <h6>
+                <a>翟1</a>
+                <a>翟2</a>
+            </h6>
+        </ul>
+        <script type="text/javascript">
+            window.onload = function() {
+                var ul = document.getElementsByTagName('ul')[0];
+                var li = ul.getElementsByTagName('li');
+                var h6 = ul.getElementsByTagName('h6');
+
+                for(var i=0;i<li.length;i++) {
+
+                    h6[i].heights = h6[i].offsetHeight;
+                    h6[i].style.height = '0px';
+                    li[i].num = 0;
+
+                    li[i].index = i;
+                    li[i].onclick = function() {
+
+                        for(var j=0;j<li.length;j++) {
+                            h6[j].style.height = "0px";
+                            li[j].children[1].style.transform = "rotate(-90deg)";
+                            // this.num = 0;
+                        }
+
+
+                        if(this.num % 2 == 0) {
+                            // 点击 让h6显示和隐藏
+                            h6[this.index].style.height = h6[this.index].heights + 'px';
+                            this.children[1].style.transform = "rotate(0deg)";
+                        }else{
+                            h6[this.index].style.height = '0px';
+                            this.children[1].style.transform = "rotate(-90deg)";
+                        }
+                        this.num++;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

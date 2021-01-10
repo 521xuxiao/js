@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            window.onload = function() {
+                // var arr = [
+                //     {name: '张三', value: 1},
+                //     {name: '李四', value: 2},
+                //     {name: '王五', value: 1},
+                //     {name: '赵柳', value: 2},
+                //     {name: '张三', value: 1},
+                //     {name: '李四', value: 3}
+                // ];
+                // var newArr = [];
+                // var obj = {};
+                // for(var i=0; i<arr.length;i++) {
+                //     if( !obj[arr[i].name]) {
+                //         newArr.push(arr[i]);
+                //         obj[arr[i].name] = true;
+                //     }
+                //
+                // }
+                //
+                //
+                // var arr2 = ["张三", "李四", "王五", "赵六", "张三", "孙七"];
+                // var obj2 = {};
+                // var newArr2 = [];
+                // for(var i=0;i<arr2.length;i++) {
+                //     if( !obj2[arr2[i]] ) {
+                //         newArr2.push(arr2[i]);
+                //         obj2[arr2[i]] = true;
+                //     }
+                // }
+                // console.log(newArr2);
+
+
+                var a = [1,2,3, 4, 5, 6],
+                    b = [3,4,5, 6];
+
+
+                // for(let i=0;i<a.length;i++) {
+                //     for(let j=0;j<b.length;j++) {
+                //         if(a[i] != b[j]) {
+                //             b[j] = a[i];
+                //         }
+                //     }
+                // }
+
+                let xuxiaoArr = [];
+                a.reduce((arr, item)=>{
+                    !b.includes(item) && arr.push(item);
+                    xuxiaoArr = arr;
+                    return arr;
+                }, []);
+                console.log(xuxiaoArr);
+                console.log(a);
+                console.log(b);
+            }
+        </script>
+    </body>
+</html>

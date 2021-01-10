@@ -1,0 +1,13 @@
+1.网上建立一个new repositiry 仓库
+2.在本地电脑git上输入建立仓库的用户信息 git config --global user.name "521xuxiao"       git config --global user.email "2501054088@qq.com"
+3.cd D:       在D盘建一个文件夹，cd到相应的文件夹里面
+4.git init
+5.在git文件夹下面放上你自己的项目，将项目提交到虚拟仓库里面  git add *       git commit -m "注释"
+6.查看提交的状态   git status
+7.git diff 文件名字    查看修改的内容
+8.git log  查看修改日志
+9.git reset --hard HEAD^  退回版本 如果想找到删除的文件，就退回版本找
+10.往git仓库上传  ssh-keygen -t rsa -C '2501054088@qq.com'
+11.setting找到ssh 将秘钥输进去
+12.进入Ropositoris，将代码push到仓库里面就行了  git remote add origin https://github.com/521xuxiao/11.git     git push -u origin master  复制电脑上面的
+13.换另一台电脑想把以前的代码clone下来，直接git clone https://github.com/521xuxiao/11.git    复制电脑而地址，每次起得名字不一样

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style media="screen">
+            .out{
+                width: 200px;
+                height: 200px;
+                background: red;
+            }
+            .out .inner{
+                width: 100px;
+                height: 100px;
+                background: yellow;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="out">
+            <div class="inner">
+
+            </div>
+        </div>
+        <script type="text/javascript">
+            window.onload = function() {
+                var out = document.querySelector('.out');
+                var inner = document.querySelector('.inner');
+                out.onclick = function(e) {
+                    var evt = e || window.event;
+                    evt.stopPropagation();
+                    evt.preventDefault();
+                    console.log(11111);
+                    return false;
+                }
+                inner.onclick = function(e) {
+                    var evt = e || window.event;
+                    evt.stopPropagation();
+                    evt.preventDefault();
+                    console.log(22222);
+                    return false;
+                }
+            }
+        </script>
+    </body>
+</html>

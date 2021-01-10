@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+
+        <div id="countdown">还剩 1 分 00 秒</div>
+
+        <script>
+
+            window.onload=function(){
+                var countdown=document.getElementById("countdown");
+
+                var time=60;//30分钟换算成1800秒 30 *60
+
+
+                var timer = setInterval(function(){
+                    time=time-1;
+                    var minute=parseInt(time/60);
+                    var second=parseInt(time%60);
+                    countdown.innerHTML='还剩'+minute+'分'+second+'秒';
+                    if(minute == 0 && second == 0) {
+                        clearInterval(timer);
+                        countdown.innerHTML = '倒计时结束';
+                    }
+                },1000);
+            }
+
+        </script>
+
+    </body>
+</html>

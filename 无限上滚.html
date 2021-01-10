@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+            *{margin: 0;padding: 0;}
+            #div1{width: 200px; height: 150px;margin: 100px auto;position: relative;  overflow: hidden;}
+            #div1 ul{list-style: none;position: absolute; top: 0}
+            #div1 ul ol{list-style: none;display: block;overflow: hidden;}
+            #div1 ul ol li{float: left;margin: 0 10px;}
+        </style>
+    </head>
+    <body>
+        <div id="div1">
+            <ul>
+                <ol><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+                <ol><li>2</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+                <ol><li>3</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+                <ol><li>4</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+                <ol><li>5</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+                <ol><li>6</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+                <ol><li>7</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+                <ol><li>8</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+                <ol><li>9</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+                <!-- <ol><li>10</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+                <ol><li>11</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+                <ol><li>12</li><li>2</li><li>3</li><li>4</li><li>5</li></ol> -->
+            </ul>
+        </div>
+        <script type="text/javascript">
+            var div1 = document.getElementById('div1');
+            var ul = div1.getElementsByTagName('ul')[0];
+            var num = 0;
+            var timer = null;
+            var flag = true;
+            window.onload = function() {
+                if(div1.offsetHeight <= ul.offsetHeight) {
+                    ul.innerHTML += ul.innerHTML;
+                    flag = true;
+                }else{
+                    flag = false;
+                }
+                ul.style.top = "0px";
+                clearInterval(timer);
+                if(flag) {
+                    move();
+                }
+
+                div1.onmouseover = function() {
+                    clearInterval(timer);
+                };
+
+                div1.onmouseout = function() {
+                    if(flag) {
+                        move();
+                    }
+                }
+
+
+
+            }
+            function move() {
+                timer = setInterval(function() {
+                    num--;
+                    ul.style.top = num + 'px';
+                    if(ul.offsetTop <= -(ul.offsetHeight / 2)) {
+                        ul.style.top = '0px';
+                        num = 0;
+                    }
+                }, 20);
+            }
+        </script>
+    </body>
+</html>

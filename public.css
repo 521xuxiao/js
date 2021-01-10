@@ -1,0 +1,24 @@
+@charset "utf-8";
+/* CSS Document */
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,figure,input,textarea,select{margin:0;padding:0;}
+body{word-wrap:break-word;font:12px  "宋体";}
+fieldset,a img,.bor0{border:0;}
+li{list-style:none;}
+a,u,s,del{color:#666;text-decoration:none;} /*文本没有修饰*/
+i,em,b{font-style:normal;font-weight:100;}/*文本不倾斜不加粗*/
+a img{border:0;}
+img{vertical-align:middle;}
+table{border-collapse:collapse;}
+input,textarea{outline:none;}/*去除谷歌点击蓝色虚框*/
+textarea{resize:none;}/*禁止多行文本输入框的拖动*/
+
+.ind2{text-indent:2em;}
+.l{float:left;}
+.r{float:right;}
+.rel{position:relative;}
+.abs{position:absolute;}
+.over{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}/*溢出出现省略号*/
+.vcenter:after{content:"";display:inline-block;vertical-align:middle;height:100%;width:0;}
+.clear{zoom:1;}
+.clear:after{content:"";display:block;clear:both;}/*清除浮动*/
+.cu{cursor:pointer;}/*鼠标指针为手型*/

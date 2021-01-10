@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <button type="button" name="button" id="btn">测试</button>
+        <input type="button" value="结果" id="result">
+        <script type="text/javascript">
+            window.onload = function() {
+                var btn = document.getElementById('btn');
+                var result = document.getElementById('result');
+                var select = document.createElement('select');
+                var jsons = [{name: '张三'}, {name: '李四'}, {name: '王五'}, {name: '赵柳'}]
+                btn.onclick = function() {
+                    var se = document.getElementsByTagName('select')[0];
+                    var op = se.getElementsByTagName('option');
+                    if(op.length == 0) {
+                        for(var i=0;i<jsons.length;i++) {
+                            var option = document.createElement('option');
+                            option.value = i+1;
+                            option.innerHTML = jsons[i].name;
+                            select.appendChild(option);
+                        }
+                    }
+                }
+                document.documentElement.appendChild(select);
+
+                result.onclick = function() {
+                    console.log(select.value);
+                }
+            }
+        </script>
+    </body>
+</html>

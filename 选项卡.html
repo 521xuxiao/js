@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style media="screen">
+            .box{
+
+            }
+            .box button{
+                outline: none;
+                border: none;
+                background: #666;
+                color: #fff;
+            }
+            .box .btn1{
+                background: red;
+            }
+            .box .p{
+                display: none;
+            }
+            .div11{
+                height: 100px;
+                width: 100px;
+                border: 1px solid red;
+                margin: 200px auto 0;
+                border-bottom: 1px solid transparent;
+            }
+        </style>
+        <script type="text/javascript">
+            window.onload = function() {
+                var div1 = document.getElementById('div1');
+                var bottons = div1.getElementsByTagName('button');
+                var ps = div1.getElementsByTagName('div');
+
+                for(var i=0;i<bottons.length;i++) {
+                    bottons[i].index = i;
+                    bottons[i].onclick = function() {
+                        for(var j=0;j<bottons.length;j++) {
+                            bottons[j].style.background = "#666";
+                            ps[j].style.display = "none";
+                        }
+                        this.style.background = "red";
+                        ps[this.index].style.display = "block";
+                    };
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="box" id="div1">
+            <button type="button" class="btn1">公孙离</button>
+            <button type="button">高渐离</button>
+            <button type="button">露娜</button>
+            <div class="p">
+                公孙离，是手游《王者荣耀》中的一名射手型英雄角色。拥有很强的敏捷力是她在游戏中重要的体验。阿离是个被教坊收养的兔子魔种。
+                即便在无比清苦的岁月中，年少的阿离也曾在心里
+            </div>
+            <div class="p">
+                高渐离，战国末燕（今河北省定兴县高里村）人，荆轲的好友 ，擅长击筑（是古代的一种击弦乐器，颈细肩圆，中空，十三弦），高渐离与荆轲的关系很好。
+            </div>
+            <div class="p">
+                露娜是腾讯手游《王者荣耀》中的一名法师战士型英雄角色。2019年4月16日正式服露娜英雄调整。 [1]
+                    她为法系战士，以古罗马神话中的月亮女神露娜为原型。容貌绝世，堪称佳人。
+                        由于操作难度比较高，建议新手玩家多加练习后使用。露娜最主要的技巧就是各种连招。打团的时候露娜因为自身的脆皮，连招技巧并不能很容易打出。
+                        大招是露娜重要的保命技能和输出伤害技能。 [2]
+            </div>
+
+            <div class="div11"></div>
+        </div>
+    </body>
+</html>
