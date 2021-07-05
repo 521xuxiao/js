@@ -1,0 +1,11 @@
+父组件：
+  <children>
+      <button>按钮</button>   // 此按钮就会在子组件slot里面显示出来
+  </children>
+  
+  
+  
+子组件：
+  <template>
+      <slot>默认显示的内容</slot>
+  </template>
