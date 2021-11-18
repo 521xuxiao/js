@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>Title</title>
+    <style>
+        .div1{
+            width: 1rem;
+            height: 1rem;
+            font-size: 0.12rem;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1" id="div1">
+        nihao
+    </div>
+    <button id="btn">防抖</button>
+    <script type="application/javascript">
+        (function(){
+            function w() {
+                var r = document.documentElement;
+                var a = r.getBoundingClientRect().width;//获取当前设备的宽度
+                if (a > 1980 ){//720不固定，根据设计稿的宽度定
+                    a = 1980;
+                }
+                rem = a / 7.2;
+                r.style.fontSize = rem + "px"
+            }
+            w();
+            window.addEventListener("resize", function() {//监听横竖屏切换
+                w()
+            }, false);
+        })();
+        // let p1 = new Promise((resolve, reject)=>{
+        //     setTimeout(()=>{
+        //         resolve(1111);
+        //     }, 1000)
+        // })
+        //
+        // let p2 = new Promise((resolve, reject)=>{
+        //     setTimeout(()=>{
+        //         resolve(2222);
+        //     }, 2000);
+        // })
+        //
+        // p1.then((res)=>{
+        //     console.log(res);
+        // })
+        //
+        // p2.then((res)=>{
+        //     console.log(res);
+        // })
+        //
+        // Promise.all([p2, p1]).then((res)=>{
+        //     console.log(res);
+        // })
+        //
+        // const obj = {
+        //     name: "张三",
+        //     age: 31
+        // }
+        //
+        // obj.name  = "李四";
+        //
+        // console.log(obj);
+        //
+        //
+        //
+        //
+        //
+        // class Person {
+        //     constructor(name, age) {
+        //         this.name = name;
+        //         this.age = age;
+        //     }
+        //
+        //     eat() {
+        //         console.log(`我是${this.name}，我今年${this.age}`)
+        //     }
+        // }
+        //
+        // let person = new Person("张三", 99);
+        // console.log(person);
+        // console.log(person.eat());
+
+
+
+        var num1 = 55;
+        var num2 = 66;
+
+        function f1(num, num1) {
+            num = 100;
+            num1 = 100;
+            num2 = 100;
+            console.log(num);
+            console.log(num1);
+            console.log(num2);
+        }
+
+        f1(num1, num2);
+        console.log(num1)
+        console.log(num2)
+        // console.log(num);
+
+
+
+        //函数的防抖(做一些模糊检索查询的时候用到)
+        function deboudle(fn, delay) {
+            var timer = null;
+
+            return function() {
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    fn.apply(this);
+                }, delay);
+            }
+        }
+        // 测试防抖函数
+        document.querySelector(("#btn")).onclick = deboudle(function () {
+            console.log("测试防抖函数");
+        }, 1000)
+
+
+
+
+
+
+        // 函数的节流(规定的时间内只触发第一次，比如form表单的提交)
+        function throttle(fn, delay) {
+            // 记录上次函数触发的时间
+            var lastTime = 0;
+
+            return function () {
+                // 记录当前函数触发的时间
+                var nowTime = Date.now();
+
+                if(nowTime - lastTime > delay) {  // 当前时间减去上次的记录时间大于规定的时间差，再次执行函数
+                    fn.call(this);
+                    lastTime = nowTime;
+                }
+            }
+        }
+        // 使用节流函数
+        document.querySelector("#div1").onclick = throttle(function () {
+            console.log("测试节流函数");
+        }, 1000);
+
+
+    </script>
+</body>
+</html>
