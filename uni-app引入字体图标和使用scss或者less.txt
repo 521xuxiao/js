@@ -1,0 +1,18 @@
+在iconfont里面下载好字体图标
+
+将iconfont放在项目里面的static文件夹里面
+
+修改下载的iconfont中css的引入路径 改为： url("~@/static/fonts/iconfont.svg?t=13243432435")
+
+在app.vue里面引入./static/fonts/iconfonts.css 即可
+
+
+
+
+
+项目中使用scss：
+ 
+       在开发工具里面找到  工具 -> 安装插件  找到scss  或者less 安装即可
+
+
+
