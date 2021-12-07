@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跟进列表</title>
+    <style>
+        .pic {
+            width: 100%;
+        }
+        .item {
+            margin: 5px;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .colors{
+            height: 80px;
+            background: #2a3753;
+            width: 100px;
+        }
+        /*.item div {*/
+        /*    display: inline;*/
+        /*    float: left;*/
+        /*}*/
+        /*.item::after {*/
+        /*    content: "";*/
+        /*    clear: both;*/
+        /*    display: block;*/
+        /*}*/
+        /*.square {*/
+        /*    width: 20%;*/
+        /*    height: 75px;*/
+        /*    background: #CAE5E8;*/
+        /*    border-radius: 8px;*/
+        /*}*/
+        /*.content {*/
+        /*    width: 79%;*/
+        /*}*/
+        .content div {
+            margin: 15px;
+            margin-top: 0px;
+            padding: 0px;
+            width: 95%;
+            border-radius: 8px;
+            line-height: 30px;
+            background: #99D1D3;
+        }
+        .content div:last-child {
+            width: 65%;
+            background: #CAE5E8;
+        }
+
+        /*从下面往上面进*/
+        /*@keyframes one-in {*/
+        /*    from {*/
+        /*        padding-top: 100px;*/
+        /*        height: 0%;*/
+        /*    }*/
+        /*    to {*/
+        /*        padding-top: 0px;*/
+        /*        height: 100%;*/
+        /*    }*/
+        /*}*/
+
+
+        /*从右往左边进的*/
+        @keyframes one-in {
+            from {
+                padding-left: 100%;
+            }
+            to {
+                padding-left: 0%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <div class="pic"></div>
+    <transition-group name="more" @before-enter="beforeEnter" @enter="enter">
+        <div class="item" v-for="(item, index) in arr" v-if="show" :data-index="index+1" :key="item">
+<!--            <div class="square"></div>-->
+<!--            <div class="content">-->
+<!--                <div>&nbsp;</div>-->
+<!--                <div>&nbsp;</div>-->
+<!--            </div>-->
+            <div class="colors"></div>
+        </div>
+    </transition-group>
+
+</div>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            show: false,
+            arr: [1, 2, 3, 4, 5, 6, 7, 80, 9, 10, 11, 12]
+        },
+        methods: {
+            // 列表进来将所有的列表元素都置成透明的
+            beforeEnter (el) {
+                el.style.opacity = 0;
+            },
+            enter (el, done) {
+                let delay = el.dataset.index * 100  // 获取当前列表的索引乘以100作为延迟时间加载进来
+                console.log(delay)
+                setTimeout(()=> {
+                    el.style.transition = 'opacity 0.4s '
+                    el.style.opacity = 1
+                    el.style.animation = 'one-in 0.4s infinite'
+                    el.style['animation-iteration-count'] = 1
+                    done()
+                }, delay)
+            }
+        },
+        mounted () {
+            this.$nextTick(()=>{
+                this.show = true;
+            })
+        }
+    })
+</script>
+</body>
+
+</html>
