@@ -1,0 +1,71 @@
+<template>
+   <div>
+       <ul>
+           <transition-group @before-enter="beforeEnter" @enter="enter">
+               <li v-for="(item, index) in list" :key="item.id" v-if="show" :data-index="index+1">{{item.name}}---{{index}}---{{item.age}}---{{item.job}}</li>
+           </transition-group>
+       </ul>
+   </div>
+</template>
+
+<script>
+    export default {
+        name: "AddClass",
+        data() {
+            return{
+                list: [
+                    {id: 1, name: '张三', age: 20, job: '程序员'},
+                    {id: 2, name: '李四', age: 21, job: '产品'},
+                    {id: 3, name: '王五', age: 22, job: '测试'},
+                    {id: 4, name: '赵六', age: 23, job: 'UI'},
+                    {id: 5, name: '孙琦', age: 24, job: '橙红'}
+                ],
+
+                show: false
+            }
+        },
+        methods: {
+            beforeEnter(el) {
+                el.style.opacity = 0;
+            },
+
+            enter(el, done) {
+                let del = el.dataset.index * 100;
+                setTimeout(()=>{
+                    el.style.transition = "all .8s";
+                    el.style.opacity = 1;
+                    done();
+                }, del);
+            }
+        },
+        mounted() {
+            this.$nextTick(()=>{
+                this.show = true;
+            })
+        }
+    }
+</script>
+
+<style scoped>
+    li{
+        border:1px dashed red;
+        margin:5px;
+        line-height:35px;
+        padding-left: 5px;
+    }
+    .v-enter,
+    .v-leave-to{
+        opacity:0;
+        transform: rotateX(90deg);
+    }
+    .v-enter-active,
+    .v-leave-active{
+        transition:all 1s ease;
+    }
+    .v-move{    /*下面的 .v-move和.v-leave-active 配合使用，能够实现列表后续的元素渐渐飘上来的效果*/
+        transition:all 1s ease;
+    }
+    .v-leave-active{
+        position:absolute;
+    }
+</style>
