@@ -9,7 +9,7 @@
     component: A,
     meta: {
         title: "A",
-        keepAlive: true
+        keepAlive: true   // 此处设置成true，不然缓存第一次不生效
     }
 },
 {
