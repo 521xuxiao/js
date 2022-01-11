@@ -151,14 +151,14 @@
         
         
         // 在vue中自定义指令封装节流函数
-        // 节流指令  v-throttle = "handleClick"
+        // 节流指令   在组件中这样使用：v-throttle = "handleClick"
         Vue.directive("throttle", {
             inserted: function(el, binding) {
                 let lastTime = 0;
                 el.onclick = ()=>{
                     const nowDate = Date.now();
                     if(nowDate - lastTime > 2000) {
-                        binding.value();
+                        binding.value();   // 通知目标方法执行
                         lastTime = nowDate;
                     }
                 }
