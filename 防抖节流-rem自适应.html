@@ -147,6 +147,23 @@
         document.querySelector("#div1").onclick = throttle(function () {
             console.log("测试节流函数");
         }, 1000);
+        
+        
+        
+        // 在vue中自定义指令封装节流函数
+        // 节流指令  v-throttle = "handleClick"
+        Vue.directive("throttle", {
+            inserted: function(el, binding) {
+                let lastTime = 0;
+                el.onclick = ()=>{
+                    const nowDate = Date.now();
+                    if(nowDate - lastTime > 2000) {
+                        binding.value();
+                        lastTime = nowDate;
+                    }
+                }
+            }}
+        )
 
 
     </script>
