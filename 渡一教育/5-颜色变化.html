@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0; padding: 0;
+        }
+
+        .box{
+            margin: 200px auto 0;
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+        }
+        .box span{
+            color: #666;
+            animation: shadowing 2s cubic-bezier(0, 0.45, 0.56, 0.93) infinite alternate;
+        }
+
+        .box span:nth-child(1){
+            animation-delay: 0.2s;
+        }
+        .box span:nth-child(2){
+            animation-delay: 0.4s;
+        }
+        .box span:nth-child(3){
+            animation-delay: 0.6s;
+        }
+        .box span:nth-child(4){
+            animation-delay: 0.8s;
+        }
+        .box span:nth-child(5){
+            animation-delay: 1s;
+        }
+        .box span:nth-child(6){
+            animation-delay: 1.2s;
+        }
+        .box span:nth-child(7){
+            animation-delay: 1.4s;
+        }
+        .box span:nth-child(8){
+            animation-delay: 1.6s;
+        }
+        .box span:nth-child(9){
+            animation-delay: 1.8s;
+        }
+        .box span:nth-child(10){
+            animation-delay: 2s;
+        }
+        .box span:nth-child(11){
+            animation-delay: 2.2s;
+        }
+        .box span:nth-child(12){
+            animation-delay: 2.4s;
+        }
+        .box span:nth-child(13){
+            animation-delay: 2.6s;
+        }
+        .box span:nth-child(14){
+            animation-delay: 2.8s;
+        }
+
+        @keyframes shadowing {
+            to{
+                color: blueviolet;
+                text-shadow: 0 0 10px blueviolet;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span>R</span>
+        <span>E</span>
+        <span>L</span>
+        <span>A</span>
+        <span>T</span>
+        <span>I</span>
+        <span>V</span>
+        <span>E</span>
+        <span>L</span>
+        <span>Y</span>
+        <span>L</span>
+        <span>O</span>
+        <span>N</span>
+        <span>G</span>
+    </div>
+</body>
+</html>

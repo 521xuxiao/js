@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>重复线性渐变 - 核心就是改变背景的位置</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .div1{
+            width: 300px;
+            height: 300px;
+            margin: 200px auto 0;
+            background-image: repeating-linear-gradient(
+                135deg,
+                red,
+                red 10px,
+                #fff 10px,
+                #fff 20px,
+                blueviolet 20px,
+                blueviolet 30px,
+                #fff 30px,
+                #fff 40px
+            );
+            padding: 4px;
+            transition: all .5s;
+            background-position: -20px -20px;
+            background-size: 200% 200%;
+        }
+        .cu{
+            width: 100%;
+            height: 100%;
+            background: #fff;
+        }
+
+        .div1:hover{
+            box-shadow: 0 0 60px #999;
+            background-size: 100% 100%;
+            background-position: 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">
+        <div class="cu">
+            大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库
+            大家好房地产开始就都非常拉数据库
+        </div>
+    </div>
+</body>
+</html>

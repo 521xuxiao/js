@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var o = (function() {
+            var obj = {
+                a: 1,
+                b: 2
+            }
+            Object.setPrototypeOf(obj, null)  // 方法二，设置一个对象的原型是 null
+            return {
+                get: function(k) {
+                    // 方法一， 判断一个对象本身是否有这个属性
+                    // if(obj.hasOwnProperty(k)) {
+                    //     return obj[k]
+                    // }
+                    // return undefined
+
+                    return obj[k]
+                }
+            }
+        })()
+
+        // 如果在不改变上面代码的情况下，修改 obj 对象
+        // console.log(o.get("valueOf")())  // valueOf 通过原型找到的属性， o.get("valueOf")()  this指向会出现问题
+
+        // 在js中读某一个成员的时候就是函数的调用
+        Object.defineProperty(Object.prototype, "abc", {
+            get: function() {
+                return this
+            }
+        })
+
+        console.log(o.get("abc"))  // 通过原型找到 abc 成员，然后就可以随意的修改第三方库里面的对象了
+        // o.get("abc").a = "通过原型修改对象的值"
+
+        // 解决以上的问题有两种办法
+
+        // 办法一：判断是不是对象自身的属性，是的话就返回，不是的话就不返回
+        // 办法二：将obj对象的原型设置为 null
+    </script>
+</body>
+</html>

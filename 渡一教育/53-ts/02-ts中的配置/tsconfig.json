@@ -1,0 +1,69 @@
+{
+    // 编译器的选项： 不知道选项里面的值有哪些，可以tsc编译一下看看
+    "compilerOptions": {
+        // 编译成js的版本，默认版本是 es3
+        "target": "es5",
+
+        // 模块化引入js的时候按照什么标准引入 es2015
+        "module": "commonjs",
+
+        // 引入的第三方库，一般不需要改，在浏览器运行用默认的
+        // "lib": [],
+
+        // 用来指定编译之后文件所在的目录
+        "outDir": "./dist",
+
+        // 编译之后的文件都存放在app.js文件里面
+        "outFile": "./dist/app.js",
+
+        "sourceMap": true,
+
+        // 对js文件是否编译
+        "allowJs": true,
+
+        // 检查js是否符合语法规范
+        "checkJs": true,
+
+        // 是否移除注释
+        "removeComments": true,
+
+        // 是否生成js文件
+        "noEmit": false,
+
+        // ts文件中有错误的时候就不生成js文件了
+        "noEmitOnError": true,
+
+
+
+        // 此处打开就相当于下面的语法检测全部打开，下面的就可以不用写了
+        "strict": true,
+
+        // 是否开启严格模式
+        "alwaysStrict": false,
+
+        // 不允许出现隐式 any ，就是必须加上数据的类型没不然报错
+        "noImplicitAny": true,
+
+        // 不允许不明确类型的this，解决的方式在函数的参数中指定this指向
+        "noImplicitThis": true,
+
+        // 严格的检查空值，比如在获取dom元素添加点击事件的时候
+        "strictNullChecks": true
+    },
+
+    // 不编译
+    "exclude": [
+        "node_modules"
+    ],
+
+    // 编译的文件
+    "include": [
+        "/src/**/*"
+    ],
+
+    // 引入外部的json文件
+    "extends": "",
+
+    // 需要编译的文件，一个一个的引入，没有 include 方便
+    "files": []
+}

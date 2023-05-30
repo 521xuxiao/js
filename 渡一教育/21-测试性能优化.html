@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #div1{
+            width: 10px;
+            height: 10px;
+            background: #1890ff;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    window.onload = function() {
+        function test1() {
+            const div1 = document.querySelector("#div1")
+            const w = div1.offsetWidth
+            const h = div1.offsetHeight
+            div1.style.width = (w + 1) + "px"
+            div1.style.height = (h + 1) + "px"
+
+            requestAnimationFrame(test1)
+        }
+
+        requestAnimationFrame(test1)
+    }
+</script>
+</body>
+</html>

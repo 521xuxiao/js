@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 判断当前的函数是否被async修饰过
+     *     利用的是函数原型上有个属性 Symbol.toStringTag 来判断是否被Async修饰过
+     * @author 许潇
+     * @Param
+     * @Return
+     */
+    function isAsync(func) {
+        return func[Symbol.toStringTag] === "AsyncFunction"
+    }
+
+    function a() {}
+    async function b() {}
+
+    console.log(isAsync(a))
+    console.log(isAsync(b))
+</script>
+</body>
+</html>

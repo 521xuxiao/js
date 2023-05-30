@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车抛物线效果</title>
+    <style>
+        html, body{
+            height: 100%;
+            overflow: hidden;
+        }
+        li{
+            list-style: none;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .card{
+            position: absolute;
+            left: 300px;
+            bottom: 200px;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            background: #1890ff;
+            text-align: center;
+            line-height: 100px;
+            color: #fff;
+        }
+        .btn{
+            outline: none;
+            border: 0;
+            background: #1890ff;
+            padding: 4px 12px;
+            color: #fff;
+            border-radius: 2px;
+            cursor: pointer;
+            position: absolute;
+            right: 200px;
+            top: 200px;
+        }
+
+        /*动画的父元素*/
+        .plus{
+            display: inline-block;
+            border-radius: 50%;
+            position: absolute;
+            top: var(--top);
+            left: var(--left);
+        }
+        /*动画子元素*/
+        .plus .i{
+            font-style: normal;
+            background: #1890ff;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: block;
+        }
+
+
+        :root{
+            --duration: 0.5s
+        }
+
+
+        /*垂直方法的运动*/
+        @keyframes moveY {
+            to{
+                transform: translateY(var(--y));
+            }
+        }
+
+        /*垂直方向的移动*/
+        .plus{
+            animation: moveY var(--duration) cubic-bezier(0.5,-0.5, 1, 1);
+        }
+
+        /*水平方向移动*/
+        @keyframes moveX {
+            to{
+                transform: translateX(var(--x));
+            }
+        }
+        /*水平方向的移动，应用在子元素中*/
+        .plus .i{
+            animation: moveX var(--duration) linear;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">购物车</div>
+
+    <button class="btn">click Me</button>
+
+<!--    <div class="plus" style="&#45;&#45;left: 300px; &#45;&#45;top: 300px; &#45;&#45;y: 1000px; &#45;&#45;x: -300px">-->
+<!--        <i class="i">+</i>-->
+<!--    </div>-->
+
+    <script>
+        const btn = document.querySelector(".btn")
+        const card = document.querySelector(".card")
+        btn.onclick = function() {
+            // 创建运动的元素
+            const div = document.createElement("div")
+            div.className = 'plus'
+            div.innerHTML = `<i class="i">+</i>`
+
+            // 找到按钮的位置
+            const circleWidth = 30
+            const btnRect = btn.getBoundingClientRect()
+            const left = btnRect.left + btnRect.width / 2 - circleWidth / 2
+            const top = btnRect.top - circleWidth / 2
+
+            // 设置变量中的值
+            div.style.setProperty("--left", left + 'px')
+            div.style.setProperty("--top", top + 'px')
+
+            // 找到购物车的位置
+            const cardRect =  card.getBoundingClientRect()
+            // 计算出运动的x轴上y轴上的运动距离
+            const x = cardRect.left + cardRect.width / 2 - circleWidth / 2 - left
+            const y = cardRect.top - circleWidth / 2 - top
+            // 设置运动的距离
+            div.style.setProperty("--x", x + "px")
+            div.style.setProperty("--y", y + "px")
+
+            // 动画结束之后删除创建的元素
+            div.addEventListener("animationend", () => {
+                div.remove()
+            }, {
+                once: true
+            })
+
+            document.body.appendChild(div)
+        }
+    </script>
+</body>
+</html>

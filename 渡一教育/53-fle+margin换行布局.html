@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex+margin换行布局</title>
+    <style>
+        *{margin: 0; padding: 0;}
+
+        :root{
+            /* 一行摆放 5 个元素，每个元素的宽度是 200px  */
+            --fleMargin: calc((100% - 200px * 5) / 5 / 2)
+        }
+
+        ul{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        ul li{
+            list-style: none;
+            width: 200px;
+            height: 200px;
+            background: #1890ff;
+
+            margin: 30px var(--fleMargin) 0;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>

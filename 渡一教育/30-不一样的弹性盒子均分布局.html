@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>不一样的弹性盒子均分布局</title>
+    <style>
+        *{margin: 0;padding: 0}
+        html, body{
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container{
+            height: 100%;
+            display: flex;
+        }
+        .container .item{
+            height: 100%;
+            flex: 1 0 0;   /* flex 属性是 flex-grow、 flex-shrink、 flex-basis的符合属性 */
+        }
+
+        .container .item:nth-child(1) {
+            background: #0e9b9d;
+        }
+        .container .item:nth-child(2) {
+            background: yellow;
+        }
+        .container .item:nth-child(3) {
+            background: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item">偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就偶就</div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+</body>
+</html>

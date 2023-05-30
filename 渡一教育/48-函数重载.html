@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数重载</title>
+</head>
+<body>
+<script>
+
+    /**
+     * 函数重载的方法，函数的运行通过几个参数来确认走哪个函数
+     * @param object
+     * @param name
+     * @param func
+     */
+    function addMethods(object, name, func) {
+        const old = object[name]
+        object[name] = function(...args) {
+            if(args.length === func.length) {
+                return func.apply(this, args)
+            }else if(typeof old === "function") {
+                return old.apply(this, args)
+            }
+        }
+    }
+
+    const searcher = {}
+
+    addMethods(searcher, "find", function() {
+        console.log("没有参数", this)
+    })
+
+    addMethods(searcher, "find", (name) => {
+        console.log("只有一个参数")
+    })
+
+    addMethods(searcher, "find", (name, name2) => {
+        console.log("有两个参数")
+    })
+
+    addMethods(searcher, "find", (firstName, lastName, thre) =>{
+        console.log("有三个参数", this)
+    })
+
+    addMethods(searcher, "find", (firstName, lastName, thre, thre2) =>{
+        console.log("有四个参数", this)
+    })
+
+    addMethods(searcher, "find", (firstName, lastName, thre, thre2, thr3) =>{
+        console.log("有五个参数", this)
+    })
+
+    addMethods(searcher, "find", (firstName, lastName, thre, thre2, thr3, thre4) =>{
+        console.log("有六个参数", this)
+    })
+
+    addMethods(searcher, "find", (firstName, lastName, thre, thre2, thr3, thre4, thre5) =>{
+        console.log("有七个参数", this)
+    })
+
+    searcher.find("1", "2", '3', '4', '5', '6', '7')
+</script>
+</body>
+</html>

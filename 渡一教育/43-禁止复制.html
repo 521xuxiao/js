@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>这是一段需要复制的内容</div>
+<script>
+    document.addEventListener("copy", (e) => {
+        e.preventDefault() //  禁止复制
+        e.clipboardData.setData("text/plain", "不准复制");  // 修改复制文字
+    })
+</script>
+</body>
+</html>

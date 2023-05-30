@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0}
+
+        .container{
+            width: 100px;
+            height: 100px;
+            background: #1890ff;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+    demo1单个元素
+    <button id="btn">随机变换位置利用flip动画实现</button>
+    <div class="container"></div>
+    <script>
+        window.onload = function() {
+            const box = document.querySelector('.container')
+            const btn = document.querySelector('#btn')
+            btn.addEventListener('click', () => {
+                let rect
+                box.style.transition = ''
+                const w = window.innerWidth
+                const h = window.innerHeight
+                rect = box.getBoundingClientRect()
+                const startLeft = rect.left
+                const startTop = rect.top
+
+
+                const rL = Math.random() * w
+                const rT = Math.random() * h
+
+                const l = rL > w - box.offsetWidth ? w - box.offsetWidth : rL
+                const t = rT > h - box.offsetHeight ? h - box.offsetHeight : rT
+
+                box.style.left = l + 'px'
+                box.style.top = t + 'px'
+
+                rect = box.getBoundingClientRect()
+                const endLeft = rect.left
+                const endTop = rect.top
+
+                box.style.transform = `translate(${startLeft - endLeft}px, ${startTop - endTop}px)`
+
+                requestAnimationFrame(() => {
+                    box.style.transition = 'transform .5s'
+                    box.style.transform = 'translate(0, 0)'
+                })
+            })
+        }
+    </script>
+</body>
+</html>

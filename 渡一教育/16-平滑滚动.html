@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0}
+        li{list-style: none}
+        .div1{
+            overflow: auto;
+            height: 400px;
+            scroll-behavior: smooth;   /*元素区域平滑滚动*/
+        }
+
+        .div2{
+            overflow: auto;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div>css实现平滑滚动</div>
+    <div class="div1">
+        <div style="height: 2000px"></div>
+    </div>
+    <button id="btn1">滚动一</button>
+    <button id="btn2">滚动二</button>
+
+    <br>
+    <br>
+    <hr>
+
+    <div>利用js实现平滑滚动</div>
+
+    <div class="div2">
+        <li style="height: 200px" id="li1">li1</li>
+        <li style="height: 200px" id="li2">li2</li>
+        <li style="height: 200px" id="li3">li3</li>
+        <li style="height: 200px" id="li4">li4</li>
+        <li style="height: 200px" id="li5">li5</li>
+        <li style="height: 200px" id="li6">li6</li>
+        <li style="height: 200px" id="li7">li7</li>
+        <li style="height: 200px" id="li8">li8</li>
+    </div>
+    <button id="btn3">滚动一</button>
+    <button id="btn4">滚动二</button>
+
+    <script>
+
+        /**
+         *   区域的平滑滚动有两种方式：
+         *      方式一：  纯css实现 scroll-behavior: smooth;
+         *      方式二：  使用js实现  dom.scrollIntoView({ behavior: 'smooth' })
+         */
+
+
+        window.onload = function() {
+
+            // css实现平滑滚动
+            const btn1 = document.querySelector("#btn1")
+            const btn2 = document.querySelector("#btn2")
+            const div1 = document.querySelector(".div1")
+            btn1.onclick = function() {
+                div1.scrollTop = 100
+            }
+            btn2.onclick = function() {
+                div1.scrollTop = 200
+            }
+
+
+
+            // js实现平滑滚动
+            const btn3 = document.querySelector("#btn3")
+            const btn4 = document.querySelector("#btn4")
+            const li4 = document.querySelector("#li4")
+            const li8 = document.querySelector("#li8")
+            btn3.onclick = function () {
+                li4.scrollIntoView({behavior: "smooth"})
+            }
+            btn4.onclick = function () {
+                li8.scrollIntoView({behavior: "smooth"})
+            }
+        }
+    </script>
+</body>
+</html>

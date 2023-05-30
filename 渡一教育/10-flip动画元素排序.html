@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0}
+        .box{
+            width: 800px;
+            margin: 200px auto 0;
+        }
+
+        .container{
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 0 10px 10px 10px;
+            width: 200px;
+            box-sizing: border-box;
+        }
+
+        .item{
+            width: 100%;
+            background: #0e9b9d;
+            border-radius: 6px;
+            margin-top: 10px;
+            color: #fff;
+            padding-left: 30px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <button id="btn">排序</button>
+        <div class="container">
+            <!--<div class="item">1</div>-->
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            const btn = document.querySelector("#btn")
+            const container = document.querySelector(".container")
+            const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+            arr.forEach(item => {
+                const div = document.createElement("div")
+                div.className = "item"
+                div.innerText = item
+                container.appendChild(div)
+            })
+
+            // flip动画帧
+            async function flip(el, callback) {
+                // 1 记录每个元素的原始位置
+                el.style.transition = ""
+                const rect = el.getBoundingClientRect()
+                const startLeft = rect.left
+                const startTop = rect.top
+
+                await callback()
+                // 2 记录每个元素的结束位置
+                const rectEnd = el.getBoundingClientRect();
+                const endLeft = rectEnd.left
+                const endTop = rectEnd.top
+
+                // 3 结束位置的元素通过transform改变到原来的位置
+                el.style.transform =  `translate(${startLeft - endLeft}px, ${startTop - endTop}px)`
+
+                // 4 请求动画帧添加动画
+                requestAnimationFrame(() => {
+                    el.style.transition = "transform .3s"
+                    el.style.transform = 'translate(0, 0)'
+                })
+            }
+
+            btn.onclick = function() {
+                const itemList = document.querySelectorAll(".item")
+                itemList.forEach(item => {
+                    flip(item, () => new Promise(resolve => setTimeout(() => resolve())))
+                })
+
+
+                // 翻转数据
+                let index = 0;
+                while (index < itemList.length) {
+                    const node = itemList[index]
+                    const insert = itemList[itemList.length - 1 - index]
+                    container.insertBefore(insert, node)
+                    index++;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

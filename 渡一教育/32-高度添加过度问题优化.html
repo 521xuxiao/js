@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0;}
+
+        .box{
+            width: 300px;
+            margin: 200px auto 0;
+        }
+        .box input{
+            outline: none;
+            width: 100%;
+            border: 1px solid #0e9b9d;
+            height: 40px;
+            border-radius: 4px;
+            padding: 0 10px;
+            box-sizing: border-box;
+            color: #666;
+        }
+        .box input:focus~.container{
+            /*max-height: 500px;*/
+            transform: scaleY(1);
+        }
+        .box .container{
+            border: 1px solid #0e9b9d;
+            border-top: 0;
+            overflow: hidden;
+            transform: scaleY(0);
+            transform-origin: center top;
+            /*height: 0;*/
+            /*max-height: 0;*/
+            transition: all .5s;
+        }
+        .box .container .item{
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            border-bottom: 1px dashed #0e9b9d;
+        }
+        .box .container .item:last-child{
+            border-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <input type="text" id="inp">
+    <div class="container">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">6</div>
+        <div class="item">5</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+        <div class="item">10</div>
+        <div class="item">9</div>
+        <div class="item">11</div>
+        <div class="item">12</div>
+    </div>
+</div>
+
+<script>
+    // height: auto 的时候过度是没有效果的，因为 auto 不是一个具体的数值
+    // 解决的办法：
+    //    1、给元素设置 ”最大高度“ 代替 ”高度“
+    //    2、利用js给元素设置高度
+    //    3、使用Y轴上的缩放 scaleY()
+
+    // 下面是js实现方式 (js代码实现起来可以解决根本问题，但是太麻烦了)
+    window.onload = function() {
+        return
+        const inp = document.querySelector("#inp")
+        const container = document.querySelector(".container")
+        inp.onfocus = function() {
+            container.style.height = "auto"
+            const height = container.offsetHeight
+            container.style.height = "0px";
+            container.offsetHeight   // 强制回流
+            container.style.transition = "all 0.5s"
+            container.style.height = height + "px"
+        }
+
+        inp.onblur = function() {
+            container.style.transition = "all 0.5s"
+            container.style.height = "0px";
+        }
+    }
+</script>
+</body>
+</html>

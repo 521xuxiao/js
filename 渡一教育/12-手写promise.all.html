@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0}
+    </style>
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            Promise.myAll = function(proms) {
+                let resov, rej;
+                let p =  new Promise((resolve, reject) =>{
+                    resov = resolve
+                    rej = reject
+                })
+
+                let count = 0; // 用于计数用的，看数组里面有多少项
+                let result = []  // 用于返回的结果
+                let finishCount = 0;  // 用于记录promise完成的数量
+
+                // 便利all里面传进来的数组
+                for(let prom of proms) {
+                    const i = count  // 记录下标给result赋值，不能直接往result里面push
+                    count++
+
+                    // 将myAll传进来的数组的每一项转换成promise对象
+                    Promise.resolve(prom).then((data) => {
+                        // myAll里面的每一项成功之后汇总到result数组中，用于返回给用户
+                        result[i] = data
+
+                        // myAll里面的所有的promise全部处理完之后resolve返回result结果
+                        finishCount++
+                        if(finishCount === count) {
+                            resov(result)
+                        }
+                    }, rej)
+                }
+
+                // 如果myAll里面传了个空数组，直接resolve回去一个空数组
+                if(count === 0) {
+                    resov(result)
+                }
+
+                return p
+            }
+
+
+
+
+
+            Promise.myAll([1, 2, 3]).then(res => {
+                console.log(res)
+            }, error => {
+                console.log(error)
+            })
+        }
+    </script>
+</body>
+</html>

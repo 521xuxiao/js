@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    window.onload = function() {
+        console.log.call.call.call.call.call.call.call.call.call.call.call.apply((a) => a, [1, 2])
+
+
+        /**
+         *  分析上面的解题思路
+         *
+         *       1、console.log.call.call.call.call.call.call.call.call.call.call.call.apply((a) => a, [1, 2])
+         *       2、上面的最终运行结果是 call.apply((a) => a, [1, 2])
+         *       3、apply的运行内部实现是： ((a) => a).call(1, 2)
+         *       4、call的内部实现：  ((a) => a)(2)  其中函数(a)=>a 中的 this 指向call中的第一个参数 1
+         */
+    }
+</script>
+</body>
+</html>

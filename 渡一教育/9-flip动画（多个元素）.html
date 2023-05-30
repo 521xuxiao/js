@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0}
+
+        .box-list{
+            width: 320px;
+            margin: 200px 0 0 200px;
+            overflow: hidden;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #1890ff;
+            float: left;
+            margin-top: 10px;
+        }
+        .box:not(:nth-child(3n+1)){
+            margin-left: 10px;
+        }
+
+        .box:nth-child(1), .box:nth-child(2), .box:nth-child(3){
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn">删除</button>
+    <div class="box-list">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+        <div class="box">7</div>
+        <div class="box">8</div>
+        <div class="box">9</div>
+        <div class="box">10</div>
+        <div class="box">11</div>
+        <div class="box">12</div>
+        <div class="box">13</div>
+        <div class="box">14</div>
+        <div class="box">15</div>
+        <div class="box">16</div>
+        <div class="box">17</div>
+        <div class="box">18</div>
+    </div>
+
+    <script>
+        const list = document.querySelector('.box-list')
+        const btn = document.querySelector('.btn')
+
+        const flip = async (el, callback) => {
+            let rect = null
+            el.style.transition = ''
+            rect = el.getBoundingClientRect()
+            const startLeft = rect.left
+            const startTop = rect.top
+
+            await callback()  // 等待删除节点之后的进行下面的代码
+
+            rect = el.getBoundingClientRect()
+            const endLeft = rect.left
+            const endTop = rect.top
+            el.style.transform = `translate(${startLeft - endLeft}px, ${startTop - endTop}px)`
+
+            requestAnimationFrame(() => {
+                el.style.transition = 'all .5s'
+                el.style.transform = 'translate(0, 0)'
+            })
+        }
+
+        btn.addEventListener('click', () => {
+            const boxs = document.querySelectorAll('.box')
+            const rIdx = 0
+            boxs.forEach(box => {
+                flip(box, () => new Promise(resolve => setTimeout(() => resolve())))
+            })
+            list.removeChild(boxs[rIdx])
+        })
+
+    </script>
+</body>
+</html>

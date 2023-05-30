@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0; padding: 0;}
+
+        html, body{
+            overflow: hidden;
+            height: 100%;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .div1{
+            font-size: 80px;
+            position: relative;
+            color: red;
+        }
+
+        /*添加背景效果，更像艺术字*/
+        .div1:before{
+            content: "文字树立起来，背部有阴影";
+            position: absolute;
+            color: #000;
+            z-index: -1;
+            /*先倾斜50 deg ，然后y轴缩放0.5倍，最后移动到需要的位置*/
+            transform: translate(-46px, 20px) scaleY(0.5) skew(50deg);
+            /*高斯模糊*/
+            filter: blur(2px);
+            /*放遮罩层，线性渐变，看起来远处的颜色淡一些*/
+            -webkit-mask-image: linear-gradient(transparent, #000);
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">文字树立起来，背部有阴影</div>
+</body>
+</html>

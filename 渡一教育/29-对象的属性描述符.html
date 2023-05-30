@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象的属性描述符</title>
+</head>
+<body>
+<script>
+    window.onload = function() {
+       var obj = {
+          a: 1,
+          b: 2
+       }
+
+       // 设置obj对象的属性c不能便利
+        Object.defineProperty(Object.prototype, "c", {
+            enumerable: false
+        })
+       Object.prototype.c = function() {
+           console.log("c")
+       }
+
+        console.log(obj.c)
+
+        var objProto = Object.getOwnPropertyDescriptor(obj, "a")
+        console.log(objProto)  // 得到属性描述符
+        /**
+         * 上面的方法得到的是属性描述符
+         *    configurable: false 设置描述符本身不能再修改
+         *    enumerable: false  设为false就不能便利
+         *    value:  1
+         *    writable: false,   writable为false表示不能更改
+         *    setter
+         *    getter
+         */
+
+        let obj1 = {}
+        let xxx = undefined
+        Object.defineProperty(obj1, "a", {
+            get() {
+                return xxx
+            },
+            set(val) {
+                xxx = val
+            },
+        })
+        obj1.a = 12
+        console.log(obj1.a)
+
+
+        /**
+         * class 类中在构造函数中
+         *    class person {
+         *        constructor(obj) {
+         *            Object.freeze({...obj})  // 对传进来的对象深克隆一下冻结
+         *            xxxx  // 处理自己的业务
+         *            Object.seal(this)  // 处理完业务之后对自己进行密封，防止用户对实例化之后的对象进行修改，同时可以对自己的同名属性更改
+         *        }
+         *    }
+         */
+    }
+</script>
+</body>
+</html>

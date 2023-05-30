@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a data-thunder href="https://img1.baidu.com/it/u=413643897,2296924942&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500">下载图片一</a>
+<a data-thunder href="https://lmg.jj20.com/up/allimg/4k/s/02/2109250006343S5-0-lp.jpg">下载图片二</a>
+
+<script>
+    window.onload = function() {
+        const links = document.querySelectorAll("a[data-thunder]")
+        for(let link of links) {
+            const newHref = btoa(`AA${link.href}ZZ`)
+            link.href = `thunder://${newHref}`
+        }
+    }
+</script>
+</body>
+</html>

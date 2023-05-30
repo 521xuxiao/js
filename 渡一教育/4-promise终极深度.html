@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise终极面试 - 超级难度</title>
+</head>
+<body>
+    <script>
+        Promise.resolve(0)
+            .then((res) => {
+                console.log(res)
+                return Promise.resolve(4)
+            })
+            .then((res) => {
+                console.log(res)
+            })
+
+        Promise.resolve()
+            .then(() => {
+                console.log(1)
+            })
+            .then(() => {
+                console.log(2)
+
+                return Promise.resolve()
+            })
+            .then(() => {
+                console.log(3)
+            })
+            .then(() => {
+                console.log(5)
+
+                return Promise.resolve()
+            })
+            .then(() => {
+                console.log(6)
+            })
+
+        /**
+         * 上面的运行顺序
+         *
+         *      promise对象
+         *          pr1     状态：完成
+         *            p0      状态  padding
+         *            pres    状态 padding
+         *          pr2     状态  完成
+         *            p1     状态   padding
+         *            p2     padding
+         *            p3     padding
+         *            p5     padding
+         *            p6     padding
+         *
+         *
+         *      微任务队列:  5  6
+         *
+         *      控制台输出   0  1  2  3  4  5 6
+         *
+         *      then  的时候创建一个 promise对象  记录当前promise对象的状态和里面的同步代码放在微任务队列里面
+         *      如果promise里面返回promise对象，当前then的状态和里面的promise对象的状态保持一致
+         */
+    </script>
+</body>
+</html>

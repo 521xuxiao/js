@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js中的单例设计模式-使用代理</title>
+</head>
+<body>
+<script>
+
+    /**
+     * 实现单例的方法
+     * @param className
+     * @returns {{new(...[*]): {}, prototype: {}}}
+     */
+    function singleton(className) {
+        let ins = null
+        return class{
+            constructor(...args) {
+                if(!ins) {
+                    ins = new className(...args)
+                }
+                return ins
+            }
+        }
+    }
+
+
+
+
+    // 下面开始使用
+    class Video {
+        constructor(name, age) {
+            this.name = name
+            this.age = age
+        }
+    }
+
+    // 创建video对象的时候先用封装好的方法 singleton 包一次
+    const newVideo = singleton(Video)
+    // 再对包装好的方法进行创建对象就实现了单例
+    const v1 = new newVideo("许潇", 23)
+    const v2 = new newVideo()
+
+    console.log(v1)
+    console.log(v2)
+    console.log(v1 === v2)
+
+    newVideo.prototype.run = function() {
+        console.log("实现了跑")
+    }
+    //v1.run()  // 会报错，就是通过原型加方法加不上，上面的单例实现有缺陷
+
+
+
+    /////////////////////////////////  上面的实现单例了，但是在Video原型上加方法就不行了，因为加在了 singleton 方法中的返回的 class 中了  /////////////////////////////////////////
+
+    // 使用代理实现单例
+    function singletonProxy(className) {
+        let ins
+        return new Proxy(className, {  // 使用代理劫持到传进来的class中的构造器
+            construct(target, args) {  // target就是传进来的 className 类
+                if(!ins) {
+                    ins = new target(...args)
+                }
+                return ins
+            }
+        })
+    }
+
+    class person{
+        constructor() {
+            this.name = "张三"
+            this.age = 33
+        }
+    }
+
+    const newPerson = singletonProxy(person)
+    const p1 = new newPerson()
+    const p2 = new newPerson()
+    newPerson.prototype.run = function() {
+        console.log("学会跑了")
+    }
+    console.log(p1)
+    console.log(p2)
+    p1.run()
+    console.log(p1 === p2)
+</script>
+</body>
+</html>

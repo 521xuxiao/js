@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        html, body{
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bg"></canvas>
+
+    <script>
+        window.onload = function() {
+            // 获取canvas元素
+            const cvs = document.querySelector("#bg")
+
+            // 获取视口宽高
+            const width = window.innerWidth
+            const height = window.innerHeight
+            // 设置canvas尺寸为视口的宽高
+            cvs.width = width
+            cvs.height = height
+
+            // 获取canvas绘制上下文
+            const ctx = cvs.getContext("2d")
+
+            //列宽
+            const columnWidth = 20
+            // 算出列数
+            const column = Math.floor(width / columnWidth)
+
+            // 记录每列写到第几个元素
+            const columnNextIndexes = new Array(column).fill(1)      //   [1, 1, 1, 1, 1, ....]  一共几列，数组长度就是几，默认1开始往下增加
+
+            // 绘制函数
+            function draw() {
+
+                // 画下面的，上面的涂上一层浆，显得上面的文字颜色越来越淡
+                ctx.fillStyle = "rgba(255, 255, 255, 0.1)"
+                ctx.fillRect(0, 0, width, height)
+
+                // 设置填充颜色
+                ctx.fillStyle = getRandomColor()
+                // 设置文字大小
+                ctx.fontSize = "20px"
+                // 根据列数设置填充文字
+                for(let i=0;i<column;i++) {
+                    // 设置绘制的文字在哪个位置
+                    const x = i * columnWidth
+                    const y = columnNextIndexes[i] * columnWidth
+                    // 填充随机文字
+                    ctx.fillText(getRandomChar(), x, y)
+
+                    // 画完之后数组的值加一,往下接着画
+                    if(columnNextIndexes[i] * 20 > height && Math.random() > 0.99) {  // 往下画，超出边界拉到初始的位置
+                        columnNextIndexes[i] = 1
+                    }else{   // 没有超出边界，一行一行的往下画
+                        columnNextIndexes[i]++
+                    }
+                }
+            }
+
+            // 随机颜色
+            function getRandomColor() {
+                const fontColors = [
+                    '#33b5e5',
+                    '#0099cc',
+                    '#aa66cc',
+                    '#9933cc',
+                    '#99cc00',
+                    '#669900',
+                    '#ffbb33',
+                    '#ff8800',
+                    '#ff4444',
+                    '#cc0000'
+                ]
+                return fontColors[Math.floor(Math.random() * 10)]
+            }
+
+            // 随机文字
+            function getRandomChar() {
+                const str = "hello-word"
+                return str[Math.floor(Math.random() * str.length)]
+            }
+
+            draw()
+            setInterval(draw, 40)
+        }
+    </script>
+</body>
+</html>

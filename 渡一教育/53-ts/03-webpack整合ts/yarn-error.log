@@ -1,0 +1,59 @@
+Arguments: 
+  D:\selfSoft\install\node14\node.exe C:\Users\86133\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add bable/core
+
+PATH: 
+  D:\selfSoft\install\jdk1.8\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\selfSoft\install\git\Git\cmd;D:\selfSoft\install\TortoiseGit-2.13.0.1-64bit\bin;D:\selfSoft\install\TortoiseSVN\bin;C:\Program Files\dotnet\;D:\selfSoft\install\wxchat\微信web开发者工具\dll;D:\selfSoft\install\node14\;C:\Users\86133\AppData\Local\Microsoft\WindowsApps;C:\Users\86133\AppData\Roaming\npm;
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  14.17.6
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://github.com/bable/core: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Users\86133\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141517:19)
+      at Object.onceWrapper (events.js:519:28)
+      at ClientRequest.emit (events.js:400:28)
+      at TLSSocket.emitRequestTimeout (_http_client.js:790:9)
+      at Object.onceWrapper (events.js:519:28)
+      at TLSSocket.emit (events.js:412:35)
+      at TLSSocket.Socket._onTimeout (net.js:484:8)
+      at listOnTimeout (internal/timers.js:557:17)
+      at processTimers (internal/timers.js:500:7)
+
+npm manifest: 
+  {
+    "name": "test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "build": "webpack",
+      "start": "webpack serve --open"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "html-webpack-plugin": "^5.5.1",
+      "ts-loader": "^9.4.3",
+      "typescript": "^5.0.4",
+      "webpack": "^5.84.1",
+      "webpack-cli": "^5.1.1",
+      "webpack-dev-server": "^4.15.0"
+    },
+    "dependencies": {
+      "clean-webpack-plugin": "^4.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

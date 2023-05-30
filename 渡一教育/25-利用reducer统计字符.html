@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    window.onload = function() {
+        const str = "adfgghhfdgvfdsdasdsafsdgdfsdfsdhfdggvsdvrgtirbvofjdvuoewhdfas"
+
+        // 传统方法统计字符
+        function strNum() {
+            let obj = {}
+            for(let i=0;i<str.length;i++) {
+                if(!obj[str[i]]) {
+                    obj[str[i]] = 1
+                }else{
+                    obj[str[i]]++
+                }
+            }
+            return obj
+        }
+
+        // 利用reduce做统计
+        /**
+         * reduce方式里面的第一个回调方法中的第一个参数是计算结束之后的值，第二个参数是便利的每一项
+         * @returns
+         */
+        function strNum2() {
+            const arr = str.split("")
+            return arr.reduce(function(a, b) {
+                a[b] ? a[b]++ : a[b] = 1
+                return a
+            }, {})
+        }
+        console.log(strNum2())
+    }
+</script>
+</body>
+</html>

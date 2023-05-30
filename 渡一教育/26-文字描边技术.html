@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文字描边技术</title>
+    <style>
+        *{margin: 0;padding: 0;}
+
+        html, body{
+            overflow: hidden;
+            height: 100%;
+            background: red;
+        }
+
+        .div1{
+            font-size: 60px;
+            margin: 200px 0 0 300px;
+            /*text-shadow:       !* 文字描边 *!*/
+            /*    0 -2px #fff,*/
+            /*    2px 2px #fff,*/
+            /*    2px 0 #fff,*/
+            /*    2px -2px #fff,*/
+            /*    0 2px #fff,*/
+            /*    -2px 2px #fff,*/
+            /*    -2px 0 #fff,*/
+            /*    -2px 2px #fff;*/
+
+            -webkit-text-stroke: 2px #fff;  /* 文字描边 */
+            color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">text stroke</div>
+</body>
+</html>

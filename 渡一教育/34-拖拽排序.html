@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0;}
+
+        .container{
+            width: 300px;
+            margin: 200px auto 0;
+        }
+        .container .item{
+            margin-bottom: 10px;
+            background: #ff3cf2;
+            height: 30px;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 4px;
+
+            transition: all .3s;
+        }
+
+        .container .item.moving{
+            background: transparent;
+            color: transparent;
+            border: 1px dashed #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="item" draggable="true">1</div>
+    <div class="item" draggable="true">2</div>
+    <div class="item" draggable="true">3</div>
+    <div class="item" draggable="true">4</div>
+    <div class="item" draggable="true">5</div>
+    <div class="item" draggable="true">6</div>
+</div>
+
+<script>
+    window.onload = function() {
+        const container = document.querySelector(".container")
+        // 拖拽开始的时候
+        let sourceNode;   // 当前正在拖动的元素
+        container.ondragstart = function(e) {
+            setTimeout(function() {
+                e.target.classList.add("moving")
+            }, 0)
+            sourceNode = e.target
+        }
+
+        // 当前拖拽的元素移动到哪个元素之上时触发的方法
+        container.ondragenter = function(e) {
+            e.preventDefault()    // 阻止默认行为
+            if(e.target === container || e.target === sourceNode) return  // 排除掉当前拖拽的元素移动到父元素或者自身元素
+            const children = Array.from(container.children)  // 获取到每一个待拖拽的 item 元素，转换成数组
+            const sourceIndex = children.indexOf(sourceNode) // 获取到当前正在拖拽的元素在数组中的索引
+            const targetIndex = children.indexOf(e.target)   // 获取到目标元素在数组中的索引
+            if(sourceIndex < targetIndex) {
+                console.log("往下拖拽")
+                container.insertBefore(sourceNode, e.target.nextElementSibling)   // 往下拖拽插入到目标元素的相邻的下一个元素之前
+            }else{
+                console.log("往上拖拽")
+                container.insertBefore(sourceNode, e.target)                      // 往上拖拽插入到目标元素的前面
+            }
+        }
+
+        // 拖拽的元素在目标元素上移动时触发
+        container.ondragover = function(e) {
+            e.preventDefault()    // 阻止默认行为
+        }
+
+        // 拖拽的元素离开目标元素时触发
+        container.dragleave = function() {
+
+        }
+
+        // 拖拽完成的时候将当前拖拽的元素的样式恢复到原来
+        container.ondragend = function() {
+            sourceNode.classList.remove("moving")
+        }
+    }
+</script>
+
+</body>
+</html>

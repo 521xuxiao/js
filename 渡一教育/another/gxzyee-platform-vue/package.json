@@ -1,0 +1,53 @@
+{
+  "name": "gxzyee-platform-vue",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "local": "vue-cli-service serve --mode local",
+    "dev": "vue-cli-service serve",
+    "test": "vue-cli-service serve --mode test",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "ant-design-vue": "^1.7.6",
+    "axios": "^0.21.1",
+    "core-js": "^3.6.5",
+    "js-cookie": "2.2.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "lodash": "^4.17.21",
+    "nprogress": "^0.2.0",
+    "script-loader": "^0.7.2",
+    "vue": "^2.6.14",
+    "vue-bus": "^1.2.1",
+    "vue-clipboard2": "^0.3.1",
+    "vue-i18n": "^8.23.0",
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2",
+    "xe-utils": "^3.2.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.16.5",
+    "@vue/cli-plugin-babel": "~4.5.15",
+    "@vue/cli-plugin-eslint": "~4.5.15",
+    "@vue/cli-service": "~4.5.15",
+    "babel-eslint": "^8.2.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "mockjs": "^1.1.0",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

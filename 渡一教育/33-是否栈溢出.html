@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    window.onload = function() {
+        function foo() {
+            // setTimeout(foo, 0)  // 计时器的时间到了之后执行父方法 foo , 写法可以改成  setTimeout(function() {foo()}, 0)
+            setTimeout(foo(), 0)   // 此写法就会栈溢出，因为是先执行foo函数，延时器到了之后再执行foo函数返回的结果
+        }
+        foo()
+    }
+</script>
+</body>
+</html>

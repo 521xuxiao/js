@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生js封装轮播</title>
+    <style>
+        *{margin: 0;padding: 0}
+        .carousel-container{
+            width: 300px;
+            height: 200px;
+            margin: 200px auto 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel-container .carousel-list{
+            display: flex;
+        }
+        .carousel-container .carousel-list .carousel-item{
+            width: 300px;
+            height: 200px;
+        }
+        .carousel-container .carousel-list .carousel-item img{
+            display: block;
+            width: 300px;
+            height: 200px;
+        }
+
+        .carousel-container .carousel-arrow{
+            position: absolute;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+        }
+        .carousel-container .carousel-arrow.carousel-arrow-left{
+            left: 10px;
+        }
+        .carousel-container .carousel-arrow.carousel-arrow-right{
+            right: 10px;
+        }
+
+        .carousel-container .carousel-indicator{
+            display: flex;
+            justify-content: center;
+            position: relative;
+            bottom: 16px;
+        }
+        .carousel-container .carousel-indicator .span1{
+            display: block;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            margin: 0 6px;
+        }
+        .carousel-container .carousel-indicator .span1.active{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div class="carousel-container">
+    <!-- 需要滚动的元素 -->
+    <div class="carousel-list">
+        <div class="carousel-item">
+            <img src="https://img2.baidu.com/it/u=1361506290,4036378790&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="https://img2.baidu.com/it/u=45841977,3664621913&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="https://img2.baidu.com/it/u=3329909248,3799019568&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="">
+        </div>
+    </div>
+
+    <!-- 左右按钮 -->
+    <div class="carousel-arrow carousel-arrow-left"> < </div>
+    <div class="carousel-arrow carousel-arrow-right"> > </div>
+
+    <!-- 指示器 -->
+    <div class="carousel-indicator">
+        <span class="span1 active"></span>
+        <span class="span1"></span>
+        <span class="span1"></span>
+    </div>
+</div>
+<script>
+    window.onload = function() {
+        let doms = {
+            carouselList: document.querySelector(".carousel-list"),
+            arrowLeft: document.querySelector(".carousel-arrow-left"),
+            arrowRight: document.querySelector(".carousel-arrow-right"),
+            indicators: document.querySelectorAll(".carousel-indicator .span1")
+        }
+
+        let currentIndex = 0,
+            timeId
+        function moveTos(index) {
+            // 滚动元素
+            doms.carouselList.style.transform = `translateX(${-index * 300}px)`
+            doms.carouselList.style.transition = `all 0.5S`
+
+            // 去掉指示器的显示效果
+            document.querySelector(".carousel-indicator .span1.active").classList.remove("active")
+
+            // 添加选中的指示器
+            document.querySelectorAll(".carousel-indicator .span1")[index].classList.add("active")
+
+            currentIndex = index
+        }
+
+        // 给指示器添加点击事件
+        doms.indicators.forEach((item, index) => {
+            item.onclick = function() {
+                moveTos(index)
+            }
+        })
+
+        function init() {
+            // 复制第一张元素插入到最后面
+            const first = doms.carouselList.children[0].cloneNode(true)
+
+            // 复制最后一个元素放在最前面
+            const last = doms.carouselList.children[doms.carouselList.children.length - 1].cloneNode(true)
+
+            // 将第一个元素放在最后面，复制的最后一个元素放在第一个前面
+            doms.carouselList.appendChild(first)
+            doms.carouselList.insertBefore(last, doms.carouselList.firstChild)
+
+            // 将最后一个复制的 元素放在最前面的设置为绝对定位，让页面刚上来显示第二张元素
+            last.style.position = "absolute"
+            last.style.transform = `translate(-100%)`
+        }
+
+        init()
+
+        // 左右滚动
+        function leftNext() {
+            if(currentIndex === 0){
+                console.log("无缝")
+                // 轮播到第一张拉回到最后的位置
+                doms.carouselList.style.transform = `translate(-900px)`
+                doms.carouselList.style.transition = "none"
+                // 浏览器强制渲染
+                doms.carouselList.offsetWidth
+                currentIndex = doms.indicators.length - 1
+                moveTos(doms.indicators.length - 1)
+            }else{
+                moveTos(--currentIndex)
+            }
+        }
+        function rightNext() {
+            if(currentIndex === doms.indicators.length - 1){
+                console.log("无缝")
+                // 轮播到最后一张拉回到原来的位置
+                doms.carouselList.style.transform = `translate(300px)`
+                doms.carouselList.style.transition = "none"
+                // 浏览器强制渲染
+                doms.carouselList.offsetWidth
+                currentIndex = 0
+                moveTos(0)
+            }else{
+                moveTos(++currentIndex)
+            }
+        }
+
+        doms.arrowLeft.onclick = function() {
+            clearInterval(timeId)
+            leftNext()
+            setInterval(function() {
+                leftNext()
+            }, 3000)
+        }
+        doms.arrowRight.onclick = function() {
+            clearInterval(timeId)
+            rightNext()
+            setInterval(function() {
+                rightNext()
+            }, 3000)
+        }
+
+
+        // 页面进来的时候自动轮播
+        timeId = setInterval(function() {
+            rightNext()
+        }, 3000)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0;}
+
+        .container{
+            width: 600px;
+            height: 600px;
+            margin: 200px auto 0;
+            border-radius: 50%;
+            border: 1px solid #EEE;
+            position: relative;
+            animation: rotates 60s linear infinite;
+        }
+        .item{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        img{
+            display: block;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            animation: rotates 60s linear infinite;
+            animation-direction: reverse;
+        }
+
+        @keyframes rotates{
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="item">
+                <img src="https://lmg.jj20.com/up/allimg/1114/050R1105319/21050Q05319-1-1200.jpg" alt="">
+            </div>
+            <div class="item">
+                <img src="https://lmg.jj20.com/up/allimg/1114/041621122252/210416122252-1-1200.jpg" alt="">
+            </div>
+            <div class="item">
+                <img src="https://lmg.jj20.com/up/allimg/4k/s/02/210924233115O14-0-lp.jpg" alt="">
+            </div>
+            <div class="item">
+                <img src="https://lmg.jj20.com/up/allimg/tp09/210F2130512J47-0-lp.jpg" alt="">
+            </div>
+            <div class="item">
+                <img src="https://lmg.jj20.com/up/allimg/1114/042421133312/210424133312-1-1200.jpg" alt="">
+            </div>
+            <div class="item">
+                <img src="https://img1.baidu.com/it/u=1960110688,1786190632&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281" alt="">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // 实现思路
+            //    1、js控制元素摆放的位置
+            //    2、css控制旋转
+
+            // 获取图片集合
+            const items = document.querySelectorAll(".container .item")
+            // 获取大的容器的半径
+            const r = document.querySelector(".container").clientWidth / 2
+            // 获取图片的数量
+            const count = items.length
+            // 计算每个图片之间的角度
+            const pieceDeg = 360 / count
+            // 便利图片给每个图片的x、y坐标赋值
+            for(let i=0;i<count;i++) {
+                let t = i * pieceDeg
+                // 转化成弧度
+                t = (Math.PI / 180) * t
+                // 根据勾股定理算出x坐标和y坐标
+                const x = Math.sin(t) * r
+                const y = -Math.cos(t) * r
+                // 给每个图片赋值坐标位置
+                items[i].style.transform = `translate(${x - items[0].clientWidth / 2}px, ${y - items[0].clientHeight / 2}px)`
+            }
+        }
+    </script>
+</body>
+</html>

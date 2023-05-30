@@ -1,0 +1,151 @@
+ <!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0}
+        li{
+            list-style: none;
+        }
+        canvas{
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #222;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+
+    <script>
+        const cvs = document.querySelector("canvas")
+        const cts = cvs.getContext("2d")
+
+        function init() {
+            // 写在css中的叫样式尺寸，样式尺寸 = 原始尺寸 * 缩放倍率   注 内容展示区的最大值是它的原始尺寸
+            cvs.width = window.innerWidth * devicePixelRatio
+            cvs.height = window.innerHeight * devicePixelRatio
+        }
+
+        init()
+
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max + 1 - min) + min)
+        }
+
+        class Point{
+            constructor() {
+                this.r = 6   //半径
+                this.x = getRandom(0, window.innerWidth - this.r / 2);
+                this.y = getRandom(0, window.innerHeight - this.r / 2);
+
+                // 用于动画，设置时间和x轴y轴的速度
+                this.xSpeed = getRandom(-50, 50)
+                this.ySpeed = getRandom(-50, 50)
+                this.lastTime = null;
+            }
+
+            draw(){
+
+                // 更新坐标
+                if(this.lastTime) {  // 如果时间有值更新坐标，没有值说明是第一次画，就不需要更新坐标了
+                    // 算出时间差
+                    const duration = (Date.now() - this.lastTime) / 1000
+                    // 算出距离
+                    const xDis = this.xSpeed * duration
+                    const yDis = this.ySpeed * duration
+                    // 设置边界，不让小球出去屏幕的外面
+                    let x = this.x + xDis
+                    let y = this.y + yDis
+                    if(x > cvs.width - this.r / 2){
+                        x = cvs.width - this.r / 2
+                        this.xSpeed = -this.xSpeed
+                    }else if(x < 0) {
+                        x = 0
+                        this.xSpeed = -this.xSpeed
+                    }
+                    if(y > cvs.height - this.r / 2){
+                        y = cvs.height - this.r / 2
+                        this.ySpeed = -this.ySpeed
+                    }else if(y < 0) {
+                        y = 0
+                        this.ySpeed = -this.ySpeed
+                    }
+                    // 重新给x坐标和y坐标赋值
+                    this.x = x
+                    this.y = y
+                }
+
+                cts.beginPath()
+                cts.arc(this.x, this.y, this.r, 0, Math.PI * 2)
+                cts.fillStyle = "rgb(200,200,200)"
+                cts.fill()
+
+                // 画完之后记录一下当前的时间
+                this.lastTime = Date.now()
+            }
+        }
+
+        class Graph {
+            constructor(pointNumber = 30, maxDis = 300) {
+                this.points = new Array(pointNumber).fill(0).map(() => new Point())  // 创建  30个点
+                this.maxDis = maxDis                                                 // 两个点之间的最大距离
+            }
+
+            draw() {
+
+                // canvas中的动画的原理就是一小段时间擦了之后重新画
+                requestAnimationFrame(() => {
+                    this.draw()               // 重复的画
+                })
+                cts.clearRect(0, 0, cvs.width, cvs.height)  // 清空画布
+
+
+                for(let i=0;i<this.points.length;i++) {
+                    const p = this.points[i];
+                    p.draw();                        // 循环30个点画出来
+
+                    for(let j=i+1;j<this.points.length;j++){  // 便利自己，30个点相互连线
+                        const p2 = this.points[j]
+
+
+                        const d = Math.sqrt((p.x - p2.x) * (p.x - p2.x) + (p.y - p2.y) * (p.y - p2.y))  // 计算两点之间的距离
+                        if(d >= this.maxDis) {                                                          // 两点之间的距离超过最大距离，就跳过，不划线了
+                            continue
+                        }
+
+                        cts.beginPath()
+                        cts.moveTo(p.x, p.y)
+                        cts.lineTo(p2.x, p2.y)
+                        cts.closePath()
+                        cts.strokeStyle = `rgba(200,200,200, ${1 - d / this.maxDis})`  // 两点之间的连线距离越远，颜色越淡
+                        cts.stroke()
+                    }
+                }
+            }
+        }
+
+        const d = new Graph()
+        d.draw()
+
+
+        // cts.beginPath()
+        // cts.moveTo(100, 50)
+        // cts.lineTo(200, 100)
+        // cts.strokeStyle = "#fff"
+        // cts.stroke()
+        //
+        // cts.beginPath()
+        // cts.arc(100, 50, 6, 0, Math.PI * 2)
+        // cts.stroke()
+        // cts.strokeStyle = "#fff"
+    </script>
+</body>
+</html>

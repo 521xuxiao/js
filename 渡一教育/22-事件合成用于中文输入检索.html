@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="input">
+<script>
+
+    window.onload = function() {
+        let isComposition = false  // 监测是否在合成的标识
+        const inp = document.querySelector("#input")
+
+        function change() {
+            !isComposition && console.log(inp.value)
+        }
+
+
+        // 输入事件
+        inp.oninput = function() {
+            change()
+        }
+
+        // 合成事件
+        inp.addEventListener("compositionstart", function() {
+            isComposition = true
+        })
+        inp.addEventListener("compositionend", function() {
+            isComposition = false
+            change()
+        })
+    }
+</script>
+</body>
+</html>

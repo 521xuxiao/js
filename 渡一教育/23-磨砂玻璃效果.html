@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .div1{
+            margin: 200px 0 0 200px;
+            position: relative;
+        }
+        .div1 span{
+            display: inline-block;
+            font-size: 40px;
+            color: #1890ff;
+        }
+        .div1 .mask{
+            background: rgba(0, 0, 0, 0.4);
+            height: 50px;
+            width: 300px;
+            position: absolute;
+            left: 200px;
+            top: 0;
+            border-radius: 6px;
+            /*filter: blur(5px);  !* filter: blur(5px)  模糊的是自身的元素 *!*/
+            backdrop-filter: blur(5px);   /* 模糊的是元素背后，自身不模糊 */
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">
+        <span>dullpolishdullpolishdullpolishdullpolish</span>
+        <div class="mask"></div>
+    </div>
+</body>
+</html>
