@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>延迟实现复杂动画</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        .ball{
+            /*定义动画延迟时间变量*/
+            --delay: 0.01s;
+
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: red;
+            margin-bottom: 50px;
+
+            animation: move 1s linear paused var(--delay) forwards;
+
+            /*动画运动完成之后保留原来的位置*/
+            /*animation-fill-mode: forwards;*/
+            /*!*动画运动停止状态*!*/
+            /*animation-play-state: paused;*/
+        }
+        @keyframes move {
+            0%{
+                transform: translateY(0) scale(1);
+            }
+            50%{
+                transform: translateX(100px) scale(1.5);
+            }
+            100%{
+                transform: translateX(200px) scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ball"></div>
+        <input type="range" min="0" max="1" step="0.01" value="0"/>
+    </div>
+
+    <script>
+
+        /**
+         *   原理就是依靠动画的延迟加载，利用滑块的滚动控制css时间变量 --delay：0s --  -1s  之间控制小球的运动
+         *
+         */
+
+
+        const inp = document.querySelector("input")
+        const ball = document.querySelector(".ball")
+        inp.oninput = function() {
+            ball.style.setProperty("--delay", -inp.value + 's')
+            console.log(-inp.value + 's')
+        }
+    </script>
+</body>
+</html>

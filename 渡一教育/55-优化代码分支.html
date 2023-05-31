@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        /**
+         * 例子一：
+         *    条件和输出都是一样的
+         */
+        function f1(name) {
+            if(name === "小狗") {
+                console.log("小狗汪汪叫")
+            }else if(name === "小猫") {
+                console.log("小猫喵喵叫")
+            }else{
+                console.log("不知道的叫声")
+            }
+        }
+
+        // 优化
+        function f1Copy(name) {
+            // 映射的条件是key代表的是判断条件，value表示的打印的数据
+            const map = {
+                "小狗": '小狗汪汪叫',
+                "小猫": '小猫喵喵叫'
+            }
+            if(map[name]) {
+                console.log(map[name])
+            }else{
+                console.log("不知道的叫声")
+            }
+        }
+
+
+        /////////////////////////////////////////////////////////////
+
+        /**
+         * 例子二：
+         *    输出是不一样的，但是判断条件是一样的
+         */
+
+        // 优化 映射关系
+        const map2 = {
+            "小狗": () => console.log("打印了"),
+            "小猫": () => console.log("上传文件了")
+        }
+        function fn3(name) {
+            if(map2[name]) {
+                map2[name]()
+            }else{
+                console.log("没有匹配上")
+            }
+        }
+
+        fn3("小猫")
+
+
+        ///////////////////////////////////////////////////////////////
+
+        /**
+         * 例子三：
+         *    输出是不一样的，判断条件很多很复杂
+         */
+        function fn4(name) {
+            if(name.includes("狗")) {
+                console.log("小狗找到小狗就是汪汪叫")
+            }else if(name.length === 2 && name.startsWith("小")) {
+                console.log("找到小猫就是上传文件")
+            }
+        }
+
+        // 优化
+        function fn5(name) {
+            const map3 = [
+                [
+                    () => (name.includes("狗")),
+                    () => console.log("小狗找到小狗就是汪汪叫")
+                ],
+                [
+                    () => (name.length === 2 && name.startsWith("小")),
+                    () => (console.log("找到小猫就是上传文件"))
+                ]
+            ]
+
+            const matchedTo = map3.find(v => v[0]())
+            if(matchedTo) {
+                matchedTo[1]()
+            }else{
+                console.log("啥也没匹配到")
+            }
+        }
+
+        fn5("小猫1")
+    </script>
+</body>
+</html>
